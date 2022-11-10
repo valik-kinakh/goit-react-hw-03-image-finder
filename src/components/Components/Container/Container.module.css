@@ -1,8 +1,6 @@
 .container {
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0 30px;
+  margin: 0 auto;
   max-width: 1200px;
   text-align: center;
 }

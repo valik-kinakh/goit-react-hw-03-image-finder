@@ -50,6 +50,7 @@ const App = () => {
   const handleFormSubmit = query => {
     setQuery(query);
     setPage(1);
+    if (error) setError('');
   };
 
   const handleIncrement = () => {
@@ -67,7 +68,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="app">
       <SearchBar onSubmit={handleFormSubmit} />
       <Section>
         <Container>
