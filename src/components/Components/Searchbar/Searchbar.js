@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import s from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 import Container from '../Container';
+import { BiSearch } from 'react-icons/bi';
 
 const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
@@ -27,7 +28,7 @@ const SearchBar = ({ onSubmit }) => {
       <Container>
         <form onSubmit={handleSubmitForm} className={s.SearchForm}>
           <button type="submit" className={s.Button}>
-            <span className={s.Label}>Search</span>
+            <BiSearch />
           </button>
 
           <input

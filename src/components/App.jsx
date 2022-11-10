@@ -17,7 +17,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const App = () => {
+const App = () => {
   const [query, setQuery] = useState('');
   const [images, setImages] = useState(null);
   const [page, setPage] = useState(1);
@@ -91,8 +91,8 @@ export const App = () => {
   };
 
   return (
-    <>
-      <SearchBar onSubmit={handleFormSubmit} />;
+    <div>
+      <SearchBar onSubmit={handleFormSubmit} />
       <Section>
         <Container>
           {status === 'idle' && <Request />}
@@ -111,6 +111,8 @@ export const App = () => {
           <img src={largeURL} alt="" />
         </Modal>
       )}
-    </>
+    </div>
   );
 };
+
+export default App;
