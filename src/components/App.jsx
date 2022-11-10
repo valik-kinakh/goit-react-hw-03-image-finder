@@ -28,18 +28,24 @@ const App = () => {
   const [largeURL, setLargeURL] = useState('');
 
   useEffect(() => {
-    if (query === '') return;
+    if (!query) return;
 
     setStatus(Status.PENDING);
     firstFetchImages(query, page);
   }, [query]);
 
   useEffect(() => {
-    if (page === 1) {
-      return;
-    }
+    if (page === 1) return;
+
     nextFetchImages(query, page);
   }, [page]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [images]);
 
   const firstFetchImages = (query, page) => {
     pixabayAPI.fetchImage(query, page).then(({ hits, total }) => {
@@ -52,22 +58,12 @@ const App = () => {
       } else {
         setError(null);
       }
-
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
     });
   };
 
   const nextFetchImages = (query, page) => {
     pixabayAPI.fetchImage(query, page).then(({ hits }) => {
       setImages(prevImg => [...prevImg, ...hits]);
-
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
     });
   };
 
