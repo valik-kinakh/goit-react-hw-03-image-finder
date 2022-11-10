@@ -5,7 +5,7 @@ import pixabayAPI from '../services/imageAPI';
 import Section from './Components/Section';
 import Container from './Components/Container';
 import ErrorMessage from './Components/ErrorMessage';
-import Request from './Components/Request';
+import WariningMessage from './Components/WarningMessage';
 import Button from './Components/Button';
 import Modal from './Components/Modal';
 import Loader from './Components/Loader';
@@ -71,7 +71,7 @@ const App = () => {
       <SearchBar onSubmit={handleFormSubmit} />
       <Section>
         <Container>
-          {!query && <Request />}
+          {!query && <WariningMessage />}
           {error && <ErrorMessage message={error} />}
           {!error && <ImageGallery images={images} openModal={openModal} />}
           {loading && <Loader />}
