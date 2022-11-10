@@ -1,26 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import s from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 import Container from '../Container';
 import { BiSearch } from 'react-icons/bi';
 
 const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState('');
+  const search = useRef();
 
   const handleSubmitForm = e => {
     e.preventDefault();
 
-    if (!query) {
+    if (!search.current.value) {
       alert('Please, enter your request!');
       return;
     }
 
-    onSubmit(query);
-    setQuery('');
-  };
-
-  const handleChangeQuery = e => {
-    setQuery(e.currentTarget.value.toLowerCase().trim());
+    onSubmit(search.current.value);
   };
 
   return (
@@ -32,13 +27,12 @@ const SearchBar = ({ onSubmit }) => {
           </button>
 
           <input
+            ref={search}
             className={s.Input}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            onChange={handleChangeQuery}
-            value={query}
           />
         </form>
       </Container>
