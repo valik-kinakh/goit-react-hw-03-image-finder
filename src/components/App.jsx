@@ -17,13 +17,17 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [largeURL, setLargeURL] = useState('');
+  const [modalImageURL, setModalImageURL] = useState('');
 
   useEffect(() => {
     if (!query) return;
+    let mounted = true;
 
     setLoading(true);
     getImages(query, page);
+    return () => {
+      mounted = false;
+    };
   }, [query, page]);
 
   useEffect(() => {
@@ -54,12 +58,12 @@ const App = () => {
 
   const openModal = url => {
     setShowModal(true);
-    setLargeURL(url);
+    setModalImageURL(url);
   };
 
   const closeModal = () => {
     setShowModal(false);
-    setLargeURL('');
+    setModalImageURL('');
   };
 
   return (
@@ -78,7 +82,7 @@ const App = () => {
       </Section>
       {showModal && (
         <Modal onClose={closeModal}>
-          <img src={largeURL} alt="" />
+          <img src={modalImageURL} alt="" />
         </Modal>
       )}
     </div>
