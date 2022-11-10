@@ -1,8 +1,8 @@
-import ImageGalleryItem from "../ImageGalleryItem";
-import PropTypes from "prop-types";
-import s from "./ImageGallery.module.css";
+import ImageGalleryItem from '../ImageGalleryItem';
+import PropTypes from 'prop-types';
+import s from './ImageGallery.module.css';
 
-const ImageGallery = ({ images, openModal }) => {
+const ImageGallery = ({ images }) => {
   return (
     <>
       <ul className={s.ImageGallery}>
@@ -11,7 +11,6 @@ const ImageGallery = ({ images, openModal }) => {
             <ImageGalleryItem
               key={id}
               webformatURL={webformatURL}
-              openModal={openModal}
               largeImageURL={largeImageURL}
               tags={tags}
             />
@@ -24,7 +23,6 @@ const ImageGallery = ({ images, openModal }) => {
 
 ImageGallery.propTypes = {
   images: PropTypes.array.isRequired,
-  openModal: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;

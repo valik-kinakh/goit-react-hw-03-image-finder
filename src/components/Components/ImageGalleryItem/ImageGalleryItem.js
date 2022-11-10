@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import s from './ImageGalleryItem.module.css';
+import { useImagesContext } from '../../../hooks/useImagesContext';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, tags, openModal }) => {
+const ImageGalleryItem = ({ webformatURL, largeImageURL, tags }) => {
+  const { openModal } = useImagesContext();
+
   return (
     <li className={s.Item}>
       <img
@@ -21,7 +24,6 @@ ImageGalleryItem.propTypes = {
   webformatURL: PropTypes.string.isRequired,
   largeImageURL: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
-  openModal: PropTypes.func.isRequired,
 };
 
 export default ImageGalleryItem;

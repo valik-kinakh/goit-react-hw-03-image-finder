@@ -9,6 +9,7 @@ import WariningMessage from './Components/WarningMessage';
 import Button from './Components/Button';
 import Modal from './Components/Modal';
 import Loader from './Components/Loader';
+import { ImagesContext } from '../context/ImagesContext';
 
 const App = () => {
   const [page, setPage] = useState(1);
@@ -70,22 +71,24 @@ const App = () => {
   return (
     <div className="app">
       <SearchBar onSubmit={handleFormSubmit} />
-      <Section>
-        <Container>
-          {!query && <WariningMessage />}
-          {error && <ErrorMessage message={error} />}
-          {!error && <ImageGallery images={images} openModal={openModal} />}
-          {loading && <Loader />}
-          {images.length > 0 && !loading && (
-            <Button onClick={handleIncrement} />
-          )}
-        </Container>
-      </Section>
-      {showModal && (
-        <Modal onClose={closeModal}>
-          <img src={modalImageURL} alt="" />
-        </Modal>
-      )}
+      <ImagesContext.Provider value={{ openModal }}>
+        <Section>
+          <Container>
+            {!query && <WariningMessage />}
+            {error && <ErrorMessage message={error} />}
+            {!error && <ImageGallery images={images} />}
+            {loading && <Loader />}
+            {images.length > 0 && !loading && (
+              <Button onClick={handleIncrement} />
+            )}
+          </Container>
+        </Section>
+        {showModal && (
+          <Modal onClose={closeModal}>
+            <img src={modalImageURL} alt="" />
+          </Modal>
+        )}
+      </ImagesContext.Provider>
     </div>
   );
 };
