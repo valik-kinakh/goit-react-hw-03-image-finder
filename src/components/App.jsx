@@ -51,6 +51,7 @@ const App = () => {
   const handleFormSubmit = query => {
     setQuery(query);
     setPage(1);
+    setImages([]);
     if (error) setError('');
   };
 
