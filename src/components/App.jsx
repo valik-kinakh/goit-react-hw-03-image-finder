@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ImageGallery from './Components/ImageGallery';
 import SearchBar from './Components/Searchbar';
 import pixabayAPI from '../services/imageAPI';
@@ -11,7 +11,11 @@ import Modal from './Components/Modal';
 import Loader from './Components/Loader';
 import { ImagesContext } from '../context/ImagesContext';
 
+const IMAGES_PER_REQUEST = 12;
+
 const App = () => {
+  const isFirstRequest = useRef(true);
+
   const [page, setPage] = useState(1);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
@@ -32,6 +36,9 @@ const App = () => {
   }, [query, page]);
 
   useEffect(() => {
+    if (images.length > IMAGES_PER_REQUEST) isFirstRequest.current = false;
+    if (isFirstRequest.current) return;
+
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
